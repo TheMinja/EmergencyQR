@@ -1,4 +1,4 @@
-package com.retro.emergencyqr.qrReader.activities;
+package com.retro.emergencyqr.activities.qrReader.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,12 +9,12 @@ import android.view.View;
 
 import com.retro.emergencyqr.R;
 
-public class qrScannerActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_qr_scanner);
+        setContentView(R.layout.activity_profile);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

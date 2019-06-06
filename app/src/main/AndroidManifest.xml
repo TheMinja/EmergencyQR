@@ -3,6 +3,7 @@
     package="com.retro.emergencyqr">
 
     <application
+        android:name=".EmergencyQRApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,15 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.retro.emergencyqr.qrReader.activities.ProfileActivity"
+            android:name=".activities.qrReader.activities.ProfileActivity"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name="com.retro.emergencyqr.qrReader.activities.qrScannerActivity"
+            android:name=".activities.qrReader.activities.qrScannerActivity"
             android:label="@string/title_activity_qr_scanner"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.retro.emergencyqr.ui.login.LoginActivity"
+            android:name="com.retro.emergencyqr.activities.login.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity android:name=".MainActivity">
             <intent-filter>

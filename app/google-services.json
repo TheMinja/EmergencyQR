@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "61235160715",
+    "firebase_url": "https://emergencyqr-1f2df.firebaseio.com",
+    "project_id": "emergencyqr-1f2df",
+    "storage_bucket": "emergencyqr-1f2df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:61235160715:android:f0c3c79e3fee0c7f",
+        "android_client_info": {
+          "package_name": "com.retro.emergencyqr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "61235160715-n388vn9cv33goprp9qgah0e7dfeuivld.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1FE6UpQXcy4v16VIDkDfyhL9wDnEIJRQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "61235160715-n388vn9cv33goprp9qgah0e7dfeuivld.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

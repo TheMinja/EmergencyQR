@@ -17,4 +17,8 @@
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_qr_scanner">qrScanner</string>
     <string name="title_activity_profile">ProfileActivity</string>
+    <string name="notice">Notice</string>
+    <string name="no_internet">No Internet</string>
+    <string name="processing">Processing…</string>
+    <string name="error_network_title">No Internet Connection</string>
 </resources>
