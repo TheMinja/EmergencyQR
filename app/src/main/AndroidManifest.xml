@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.emergencyqr">
+    package="com.retro.emergencyqr">
 
     <application
         android:allowBackup="true"
@@ -10,15 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".qrReader.activities.ProfileActivity"
+            android:name="com.retro.emergencyqr.qrReader.activities.ProfileActivity"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".qrReader.activities.qrScannerActivity"
+            android:name="com.retro.emergencyqr.qrReader.activities.qrScannerActivity"
             android:label="@string/title_activity_qr_scanner"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.login.LoginActivity"
+            android:name="com.retro.emergencyqr.ui.login.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity android:name=".MainActivity">
             <intent-filter>
