@@ -46,6 +46,7 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
 
     @Override
     public void onLoginFailed(String errorMessage) {
+        // TODO: Create error dialog.
         Log.e(LOG_TAG, "Login Failed:  "+errorMessage);
     }
 
