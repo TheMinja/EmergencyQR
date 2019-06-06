@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">EmergencyQR</string>
+    <string name="scan_qr_button">Scan QR</string>
+    <string name="name">name</string>
+    <string name="profileinfo">profileinfo</string>
+    <string name="login_userName">Username</string>
+    <string name="login_passwordHint">Password</string>
+    <string name="login_loginButtonText">LOGIN</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="title_activity_qr_scanner">qrScanner</string>
+    <string name="title_activity_profile">ProfileActivity</string>
 </resources>
