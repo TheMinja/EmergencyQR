@@ -20,8 +20,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.auth.ProviderQueryResult;
+import com.google.firebase.auth.SignInMethodQueryResult;
 import com.retro.emergencyqr.R;
 
 import java.util.Arrays;
@@ -59,7 +60,7 @@ public class FirebaseUIManager {
      */
     private FirebaseUIManager(Activity activity) {
         mActivity = activity;
-        configureGoogleSignin();
+        configureGoogleSignIn();
         mFirebaseAuth = FirebaseAuth.getInstance();
         final FacebookCallback<LoginResult> mCallback = new Callback();
         mCallbackManager = CallbackManager.Factory.create();
@@ -95,8 +96,8 @@ public class FirebaseUIManager {
      * @param email email.
      * @param task  task.
      */
-    public void getProviderByEmail(final String email, OnCompleteListener<ProviderQueryResult> task) {
-        mFirebaseAuth.fetchProvidersForEmail(email).addOnCompleteListener(task);
+    public void getProviderByEmail(final String email, OnCompleteListener<SignInMethodQueryResult> task) {
+        mFirebaseAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener(task);
     }
 
     /**
@@ -136,6 +137,7 @@ public class FirebaseUIManager {
         if (requestCode == RC_SIGN_IN) {
             try {
                 Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(intent);
+
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 if (account != null) {
@@ -152,7 +154,7 @@ public class FirebaseUIManager {
     /**
      * Config google sign in.
      */
-    private void configureGoogleSignin() {
+    private void configureGoogleSignIn() {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(mActivity.getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -203,6 +205,10 @@ public class FirebaseUIManager {
         if (null != signInFacebookListener) {
             mFirebaseAuth.signInWithCredential(credential).addOnCompleteListener(signInFacebookListener);
         }
+    }
+
+    public FirebaseUser getCurrentUser(){
+        return mFirebaseAuth.getCurrentUser();
     }
 
 }

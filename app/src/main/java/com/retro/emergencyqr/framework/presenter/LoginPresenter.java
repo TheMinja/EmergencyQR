@@ -1,6 +1,7 @@
 package com.retro.emergencyqr.framework.presenter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
@@ -39,13 +40,12 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                 @Override
                 public void onComplete(@NonNull Task task) {
                     if (null != task) {
-                        if (task.isSuccessful()) {
+                            if (task.isSuccessful()) {
                             FirebaseUser user = ((Task<AuthResult>) task).getResult().getUser();
                             handleFirebaseUser(user);
                         } else {
                             getView().updateProgressDialog(false);
                             getView().onLoginFailed("Login Error");
-                            // TODO: If sign in fails, display a message to the user.
                         }
                     } else {
                         getView().updateProgressDialog(false);
@@ -55,6 +55,16 @@ public class LoginPresenter extends BasePresenter<LoginView> {
             });
         }
     }
+
+    public void signInWithGoogle(){
+        firebaseUIManager.signInWithGoogle(mActivity);
+
+    }
+
+    public void handleGoogleSignInResult(int requestCode, int resultCode, Intent intent, OnCompleteListener onCompleteListener){
+        firebaseUIManager.handleResult(requestCode, resultCode, intent, onCompleteListener);
+    }
+
 
     /**
      * Handle firebase user return.
@@ -74,5 +84,9 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                 }
             }
         });
+    }
+
+    public FirebaseUser getCurrentUser(){
+        return firebaseUIManager.getCurrentUser();
     }
 }
