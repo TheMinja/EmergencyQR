@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/topLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:keepScreenOn="true"
+    android:orientation="vertical">
+
+    <com.retro.emergencyqr.lib.ui.CameraSourcePreview
+        android:id="@+id/qrscan_preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+
+        <com.retro.emergencyqr.lib.ui.GraphicOverlay
+            android:id="@+id/qrscan_graphic_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.retro.emergencyqr.lib.ui.CameraSourcePreview>
+</FrameLayout>

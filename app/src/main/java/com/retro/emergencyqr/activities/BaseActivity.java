@@ -189,15 +189,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
      */
     protected abstract void bindView();
 
-    /**
-     * @return the url scheme that can be used to return to the app from a web page. This url
-     * scheme should be used to build a return url and passed to the target web page via a query
-     * param when browser switching.
-     */
-    public String getReturnUrlScheme() {
-        return this.getPackageName().toLowerCase().replace("_", "") + ".astroewallet";
-    }
-
     @Override
     public void updateProgressDialog(boolean isShowProgressDialog) {
         if (isShowProgressDialog) {

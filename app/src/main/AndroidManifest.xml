@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.retro.emergencyqr">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
     <application
         android:name=".EmergencyQRApplication"
         android:allowBackup="true"
@@ -21,6 +23,8 @@
         <activity
             android:name="com.retro.emergencyqr.activities.login.LoginActivity"
             android:label="@string/title_activity_login" />
+        <activity
+            android:name="com.retro.emergencyqr.activities.qrReader.QRScanActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,9 +34,17 @@
         </activity>
     </application>
 
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
+    <uses-permission
+        android:name="android.permission.CAMERA"
+        tools:node="merge" />
+    <uses-permission
+        android:name="android.permission.VIBRATE"
+        tools:node="merge" />
+    <uses-permission
+        android:name="android.permission.INTERNET"
+        tools:node="merge" />
 </manifest>

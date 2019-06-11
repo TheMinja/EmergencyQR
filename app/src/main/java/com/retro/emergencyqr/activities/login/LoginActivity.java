@@ -41,6 +41,7 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
     public void onLoginSuccess() {
         // TODO: Navigate to main app.
         Log.e(LOG_TAG, "Login success");
+        finish();
 
     }
 

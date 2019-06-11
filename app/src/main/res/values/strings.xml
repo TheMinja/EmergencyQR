@@ -21,4 +21,8 @@
     <string name="no_internet">No Internet</string>
     <string name="processing">Processing…</string>
     <string name="error_network_title">No Internet Connection</string>
+    <string name="qr_scan_no_qr_detected">No QR code detected</string>
+    <string name="qr_scan_request_camera_permission_message">Access to the camera is needed for detection</string>
+    <string name="qr_scan_request_permission_denied_message">Cannot access camera to use QR Scan feature</string>
+    <string name="btn_OK">OK</string>
 </resources>

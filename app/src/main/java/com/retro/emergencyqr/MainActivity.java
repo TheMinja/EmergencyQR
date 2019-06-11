@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.retro.emergencyqr.activities.login.LoginActivity;
+import com.retro.emergencyqr.activities.qrReader.QRScanActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btnLogin).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                startActivity(new Intent(MainActivity.this, QRScanActivity.class));
             }
         });
     }
