@@ -21,17 +21,14 @@
             android:label="@string/title_activity_qr_scanner"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.retro.emergencyqr.activities.login.LoginActivity"
-            android:label="@string/title_activity_login" />
-        <activity
-            android:name="com.retro.emergencyqr.activities.qrReader.QRScanActivity" />
-        <activity android:name=".MainActivity">
+            android:name="com.retro.emergencyqr.activities.LoginActivity"
+            android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.retro.emergencyqr.activities.qrReader.QRScanActivity" />
     </application>
 
     <uses-feature android:name="android.hardware.camera" />
