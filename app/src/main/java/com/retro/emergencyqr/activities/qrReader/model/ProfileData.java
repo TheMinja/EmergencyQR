@@ -1,4 +1,4 @@
-package com.example.emergencyqr.qrReader.model;
+package com.retro.emergencyqr.activities.qrReader.model;
 
 public class ProfileData {
 
