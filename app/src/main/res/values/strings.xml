@@ -26,4 +26,10 @@
     <string name="qr_scan_request_camera_permission_message">Access to the camera is needed for detection</string>
     <string name="qr_scan_request_permission_denied_message">Cannot access camera to use QR Scan feature</string>
     <string name="btn_OK">OK</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+
+    <string name="facebook_app_id">1212586158920025</string>
+    <string name="fb_login_protocol_scheme">fb1212586158920025</string>
 </resources>
