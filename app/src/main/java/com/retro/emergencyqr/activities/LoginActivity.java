@@ -6,7 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,9 +28,9 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
     protected void onStart() {
         super.onStart();
 
-        if(mLoginPresenter.getCurrentUser() != null){
-            onLoginSuccess();
-        }
+//        if(mLoginPresenter.getCurrentUser() != null){
+//            onLoginSuccess();
+//        }
     }
 
     @Override
@@ -45,6 +47,8 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
     protected void initEvent() {
         findViewById(R.id.btnLogin).setOnClickListener(this);
         findViewById(R.id.google_sign_in).setOnClickListener(this);
+        findViewById(R.id.signUpButton).setOnClickListener(this);
+        findViewById(R.id.termsButton).setOnClickListener(this);
     }
 
     @Override
@@ -62,7 +66,7 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
     @Override
     public void onLoginSuccess() {
         startActivity(new Intent(this, QRScanActivity.class));
-        Log.e(LOG_TAG, "Login success");
+        Log.d(LOG_TAG, "Login success");
         finish();
     }
 
@@ -82,13 +86,17 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
             case R.id.google_sign_in: {
                 mLoginPresenter.signInWithGoogle();
             }
+            case R.id.signUpButton: {
+                //TODO Sign up flow
+            }case R.id.termsButton: {
+                //TODO make terms flow
+            }
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         mLoginPresenter.handleGoogleSignInResult(1234, resultCode, data, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(Task task) {

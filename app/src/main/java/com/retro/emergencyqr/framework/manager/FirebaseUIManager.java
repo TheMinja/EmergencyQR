@@ -145,7 +145,7 @@ public class FirebaseUIManager {
                 }
             } catch (ApiException e) {
                 onCompleteListener.onComplete(null);
-                Log.w(LOG_TAG, "Google sign in failed", e);
+                Log.e(LOG_TAG, "Google sign in failed");
             }
         }
         mCallbackManager.onActivityResult(requestCode, resultCode, intent);

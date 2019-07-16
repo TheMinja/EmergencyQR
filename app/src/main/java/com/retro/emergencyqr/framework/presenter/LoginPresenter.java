@@ -35,12 +35,12 @@ public class LoginPresenter extends BasePresenter<LoginView> {
         if (getView() != null) {
             getView().updateProgressDialog(true);
         }
-        if (!TextUtils.isEmpty(userName) || !TextUtils.isEmpty(password)) {
+        if (!TextUtils.isEmpty(userName) && !TextUtils.isEmpty(password)) {
             firebaseUIManager.signInWithEmailAndPassword(mActivity, userName, password, new OnCompleteListener() {
                 @Override
                 public void onComplete(@NonNull Task task) {
                     if (null != task) {
-                            if (task.isSuccessful()) {
+                        if (task.isSuccessful()) {
                             FirebaseUser user = ((Task<AuthResult>) task).getResult().getUser();
                             handleFirebaseUser(user);
                         } else {
@@ -53,6 +53,9 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                     }
                 }
             });
+        }else {
+            getView().updateProgressDialog(false);
+            getView().onLoginFailed("Empty Fields");
         }
     }
 
