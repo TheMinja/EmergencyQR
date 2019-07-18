@@ -2,6 +2,7 @@ package com.retro.emergencyqr.framework.manager;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.facebook.AccessToken;
@@ -18,6 +19,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -79,6 +81,10 @@ public class FirebaseUIManager {
                                            final String password, OnCompleteListener onCompleteListener) {
         mFirebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(activity, onCompleteListener);
+    }
+
+    public void createUserWithEmailAndPassword(String username, String password, OnCompleteListener<AuthResult> onCompleteListener){
+        mFirebaseAuth.createUserWithEmailAndPassword(username, password).addOnCompleteListener(onCompleteListener);
     }
 
     /**
