@@ -13,7 +13,7 @@
 
 
     <com.google.android.gms.common.SignInButton
-        android:id="@+id/google_sign_in"
+        android:id="@+id/toGoogleSignInButton"
         android:layout_width="194dp"
         android:layout_height="59dp"
         android:layout_marginStart="8dp"
@@ -72,7 +72,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edtPassword" />
 
     <Button
-        android:id="@+id/termsButton"
+        android:id="@+id/toTermsButton"
         android:layout_width="269dp"
         android:layout_height="62dp"
         android:layout_marginStart="8dp"
@@ -97,6 +97,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/google_sign_in" />
+        app:layout_constraintTop_toBottomOf="@+id/toGoogleSignInButton" />
 
 </android.support.constraint.ConstraintLayout>

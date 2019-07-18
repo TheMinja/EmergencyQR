@@ -44,9 +44,9 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
     @Override
     protected void initEvent() {
         findViewById(R.id.btnLogin).setOnClickListener(this);
-        findViewById(R.id.google_sign_in).setOnClickListener(this);
+        findViewById(R.id.toGoogleSignInButton).setOnClickListener(this);
         findViewById(R.id.toSignUpButton).setOnClickListener(this);
-        findViewById(R.id.termsButton).setOnClickListener(this);
+        findViewById(R.id.toTermsButton).setOnClickListener(this);
     }
 
     @Override
@@ -81,13 +81,16 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
                 mLoginPresenter.siginWithUsernamePass(edtuserName.getText().toString(), edtPassowrd.getText().toString());
                 break;
             }
-            case R.id.google_sign_in: {
+            case R.id.toGoogleSignInButton: {
                 mLoginPresenter.signInWithGoogle();
+                break;
             }
             case R.id.toSignUpButton: {
                 startActivity(new Intent(this, SignUpActivity.class));
-            }case R.id.termsButton: {
-                //TODO make terms flow
+                break;
+            }case R.id.toTermsButton: {
+                startActivity(new Intent(this, TermsAndConditionsActivity.class));
+                break;
             }
         }
     }
