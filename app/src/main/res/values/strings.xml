@@ -124,4 +124,9 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
+    <string name="signup_passwordMatchError">Passwords Don\'t Match</string>
+    <string name="signup_usernameBlankError">Username is Blank</string>
+    <string name="signup_firebaseError">Firebase Error</string>
+    <string name="signup_regiSuccess">Registration Successful</string>
+    <string name="signup_regiFailed">Registration Failed:</string>
 </resources>

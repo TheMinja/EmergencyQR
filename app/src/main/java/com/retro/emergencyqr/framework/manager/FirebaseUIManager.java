@@ -83,8 +83,8 @@ public class FirebaseUIManager {
                 .addOnCompleteListener(activity, onCompleteListener);
     }
 
-    public void createUserWithEmailAndPassword(String username, String password, OnCompleteListener<AuthResult> onCompleteListener){
-        mFirebaseAuth.createUserWithEmailAndPassword(username, password).addOnCompleteListener(onCompleteListener);
+    public void createUserWithEmailAndPassword(Activity activity, String username, String password, OnCompleteListener<AuthResult> onCompleteListener){
+        mFirebaseAuth.createUserWithEmailAndPassword(username, password).addOnCompleteListener(activity, onCompleteListener);
     }
 
     /**
