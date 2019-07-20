@@ -2,8 +2,8 @@ package com.retro.emergencyqr.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
+import androidx.annotation.Nullable;
+import com.google.android.material.snackbar.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;

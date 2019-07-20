@@ -3,7 +3,7 @@ package com.retro.emergencyqr.lib.ui;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;

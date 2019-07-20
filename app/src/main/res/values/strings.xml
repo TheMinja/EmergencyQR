@@ -129,4 +129,5 @@
     <string name="signup_firebaseError">Firebase Error</string>
     <string name="signup_regiSuccess">Registration Successful</string>
     <string name="signup_regiFailed">Registration Failed:</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
