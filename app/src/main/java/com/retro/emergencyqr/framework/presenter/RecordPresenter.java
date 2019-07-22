@@ -1,0 +1,29 @@
+package com.retro.emergencyqr.framework.presenter;
+
+import android.app.Activity;
+
+import com.retro.emergencyqr.framework.manager.PrefsDataManager;
+import com.retro.emergencyqr.framework.view.RecordsView;
+
+public class RecordPresenter extends BasePresenter<RecordsView> {
+    private Activity mActivity;
+    private PrefsDataManager prefsDataManager;
+
+    public RecordPresenter(Activity activity){
+        this.mActivity = activity;
+        prefsDataManager = PrefsDataManager.getInstance(mActivity);
+    }
+
+    public void writeData(String name, String dOB, String allergies, String currentMedication, String hospital){
+        prefsDataManager.writeToPreferences("name", name);
+        prefsDataManager.writeToPreferences("DOB", dOB);
+        prefsDataManager.writeToPreferences("allergies", allergies);
+        prefsDataManager.writeToPreferences("currentMedication", currentMedication);
+        prefsDataManager.writeToPreferences("hospital", hospital);
+    }
+
+    public String readData(String key){
+        return prefsDataManager.readFromPreferences(key);
+    }
+
+}
