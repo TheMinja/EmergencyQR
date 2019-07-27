@@ -2,6 +2,7 @@ package com.retro.emergencyqr.framework.presenter;
 
 import android.app.Activity;
 
+import com.retro.emergencyqr.R;
 import com.retro.emergencyqr.framework.manager.PrefsDataManager;
 import com.retro.emergencyqr.framework.view.RecordsView;
 
@@ -15,11 +16,11 @@ public class RecordPresenter extends BasePresenter<RecordsView> {
     }
 
     public void writeData(String name, String dOB, String allergies, String currentMedication, String hospital){
-        prefsDataManager.writeToPreferences("name", name);
-        prefsDataManager.writeToPreferences("DOB", dOB);
-        prefsDataManager.writeToPreferences("allergies", allergies);
-        prefsDataManager.writeToPreferences("currentMedication", currentMedication);
-        prefsDataManager.writeToPreferences("hospital", hospital);
+        prefsDataManager.writeToPreferences(mActivity.getString(R.string.recordsNameKey), name);
+        prefsDataManager.writeToPreferences(mActivity.getString(R.string.recordsDOBKey), dOB);
+        prefsDataManager.writeToPreferences(mActivity.getString(R.string.recordsAllergiesKey), allergies);
+        prefsDataManager.writeToPreferences(mActivity.getString(R.string.recordsMedicationKey), currentMedication);
+        prefsDataManager.writeToPreferences(mActivity.getString(R.string.recordsHospitalKey), hospital);
     }
 
     public String readData(String key){

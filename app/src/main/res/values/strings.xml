@@ -131,4 +131,10 @@
     <string name="signup_regiFailed">Registration Failed:</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_enter_records">EnterRecordsActivity</string>
+    <string name="recordsSuccess">Record Saved Successful</string>
+    <string name="recordsNameKey">name</string>
+    <string name="recordsDOBKey">DOB</string>
+    <string name="recordsAllergiesKey">allergies</string>
+    <string name="recordsMedicationKey">currentMedication</string>
+    <string name="recordsHospitalKey">hospital</string>
 </resources>

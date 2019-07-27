@@ -63,7 +63,8 @@ public class LoginActivity extends BaseActivity implements LoginView, View.OnCli
 
     @Override
     public void onLoginSuccess() {
-        startActivity(new Intent(this, QRScanActivity.class));
+        //TODO logic for enter records or qr scan
+        startActivity(new Intent(this, EnterRecordsActivity.class));
         Log.d(LOG_TAG, "Login success");
         finish();
     }
