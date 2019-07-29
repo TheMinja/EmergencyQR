@@ -26,7 +26,6 @@ public class PrefsDataManager {
 
     public void writeToPreferences(String key, String value){
         editor.putString(key, value);
-        editor.commit();
     }
 
     /**
@@ -35,6 +34,14 @@ public class PrefsDataManager {
      */
     public String readFromPreferences(String key){
         return sharedPreferences.getString(key, "");
+    }
+
+    /**
+     *
+     * @return true if successful, false if failed
+     */
+    public Boolean commitToPreferences(){
+        return editor.commit();
     }
 
 }

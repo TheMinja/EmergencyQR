@@ -16,11 +16,21 @@ public class RecordPresenter extends BasePresenter<RecordsView> {
     }
 
     public void writeData(String name, String dOB, String allergies, String currentMedication, String hospital){
+        getView().updateProgressDialog(true);
+
         prefsDataManager.writeToPreferences(mActivity.getString(R.string.recordsNameKey), name);
         prefsDataManager.writeToPreferences(mActivity.getString(R.string.recordsDOBKey), dOB);
         prefsDataManager.writeToPreferences(mActivity.getString(R.string.recordsAllergiesKey), allergies);
         prefsDataManager.writeToPreferences(mActivity.getString(R.string.recordsMedicationKey), currentMedication);
         prefsDataManager.writeToPreferences(mActivity.getString(R.string.recordsHospitalKey), hospital);
+
+        if(prefsDataManager.commitToPreferences()){
+            getView().updateProgressDialog(false);
+            getView().onRecordSuccess();
+        }else {
+            getView().updateProgressDialog(false);
+            getView().onRecordFailed();
+        }
     }
 
     public String readData(String key){

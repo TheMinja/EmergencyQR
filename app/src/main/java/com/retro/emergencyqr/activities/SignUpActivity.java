@@ -62,7 +62,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView, View.OnC
     @Override
     public void onSignUpSuccess() {
         Toast.makeText(SignUpActivity.this, getString(R.string.signup_regiSuccess), Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+        startActivity(new Intent(SignUpActivity.this, ViewProfileActivity.class));
 
     }
 
