@@ -25,7 +25,6 @@ public class EnterRecordsActivity extends BaseActivity implements RecordsView, V
     private EditText allergies;
     private EditText dOB;
     private EditText name;
-    private Button confirm;
 
     private RecordPresenter mRecordPresenter;
 
@@ -82,7 +81,7 @@ public class EnterRecordsActivity extends BaseActivity implements RecordsView, V
                         medication.getText().toString(),
                         hospital.getText().toString());
                 //TODO check if successfully saved then start new activity
-                startActivity(new Intent(this, QRScanActivity.class));
+                startActivity(new Intent(this, ViewProfileActivity.class));
                 break;
             }
         }
