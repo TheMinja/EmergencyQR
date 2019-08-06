@@ -32,16 +32,16 @@ public class ViewProfilePresenter extends BasePresenter<ProfileView> {
         if(!name.isEmpty()) {
             getView().setText(0, name);
         }
-        if(dOB.isEmpty()) {
+        if(!dOB.isEmpty()) {
             getView().setText(1, dOB);
         }
-        if(medication.isEmpty()){
+        if(!medication.isEmpty()){
             getView().setText(2, medication);
         }
-        if(allergies.isEmpty()){
+        if(!allergies.isEmpty()){
             getView().setText(3, allergies);
         }
-        if(hospital.isEmpty()){
+        if(!hospital.isEmpty()){
             getView().setText(4, hospital);
         }
     }
