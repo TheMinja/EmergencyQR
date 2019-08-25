@@ -2,6 +2,7 @@ package com.retro.emergencyqr.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -57,7 +58,7 @@ public class ViewProfileActivity extends BaseActivity implements ProfileView, Vi
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.profileEmergencyButton: {
                 startActivity(new Intent(this, QRScanActivity.class));
                 break;

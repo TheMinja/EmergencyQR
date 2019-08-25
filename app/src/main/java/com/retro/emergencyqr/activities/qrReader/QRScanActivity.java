@@ -1,43 +1,33 @@
 package com.retro.emergencyqr.activities.qrReader;
 
 import android.Manifest;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import androidx.annotation.NonNull;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.core.app.ActivityCompat;
-import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+
 import com.google.android.gms.vision.CameraSource;
-import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.barcode.Barcode;
-import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.retro.emergencyqr.R;
 import com.retro.emergencyqr.activities.BaseActivity;
-import com.retro.emergencyqr.lib.ui.BarcodeTrackerFactory;
+import com.retro.emergencyqr.activities.MapsActivity;
+import com.retro.emergencyqr.activities.ViewProfileActivity;
+import com.retro.emergencyqr.framework.presenter.QRScanPresenter;
+import com.retro.emergencyqr.framework.view.QRScanView;
 import com.retro.emergencyqr.lib.ui.CameraSourcePreview;
 import com.retro.emergencyqr.lib.ui.GraphicOverlay;
-
-import java.io.IOException;
-
-import static com.retro.emergencyqr.utils.Constant.RequestCode.RC_HANDLE_CAMERA_PERM;
-import static com.retro.emergencyqr.utils.Constant.RequestCode.RC_HANDLE_GMS;
 
 /**
  * Created by tommy on 10/June/2019.
  */
-public class QRScanActivity extends BaseActivity implements GraphicOverlay.OnScannerCallback {
+public class QRScanActivity extends BaseActivity implements GraphicOverlay.OnScannerCallback, QRScanView {
 
     private static final String TAG = QRScanActivity.class.getSimpleName();
+    private QRScanPresenter qrScanPresenter;
 
     private final Object mMutex = new Object();
 
@@ -48,15 +38,8 @@ public class QRScanActivity extends BaseActivity implements GraphicOverlay.OnSca
 
     private View topLayout;
 
-    /**
-     * Camera config auto focus. Default is true
-     */
-    private boolean autoFocus = true;
-
-    /**
-     * Camera config request fps.
-     */
-    private float requestedFps = 15.0f;
+    private float x1, x2;
+    static final int MIN_DISTANCE = 150;
 
     @Override
     protected int getLayoutResourceId() {
@@ -67,9 +50,9 @@ public class QRScanActivity extends BaseActivity implements GraphicOverlay.OnSca
     protected void initEvent() {
         int rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
         if (rc == PackageManager.PERMISSION_GRANTED) {
-            createCameraSource();
+            qrScanPresenter.createCameraSource(mGraphicOverlay, mPreview);
         } else {
-            requestCameraPermission();
+            qrScanPresenter.requestCameraPermission();
         }
     }
 
@@ -83,13 +66,14 @@ public class QRScanActivity extends BaseActivity implements GraphicOverlay.OnSca
 
     @Override
     protected void bindView() {
-
+        qrScanPresenter = new QRScanPresenter(this);
+        qrScanPresenter.bindView(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        startCameraSource();
+        qrScanPresenter.startCameraSource();
     }
 
     @Override
@@ -98,135 +82,35 @@ public class QRScanActivity extends BaseActivity implements GraphicOverlay.OnSca
         stopCamera();
     }
 
-    /**
-     * Create camera source for preview.
-     */
-    public void createCameraSource() {
-        Context context = getApplicationContext();
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                x1 = event.getX();
+                break;
+            case MotionEvent.ACTION_UP:
+                x2 = event.getX();
+                float deltaX = x2 - x1;
 
-        // Create Multi tracker process
-        BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(context)
-                .setBarcodeFormats(Barcode.QR_CODE).build();
-        BarcodeTrackerFactory barcodeFactory = new BarcodeTrackerFactory(mGraphicOverlay);
-        barcodeDetector.setProcessor(
-                new MultiProcessor.Builder<>(barcodeFactory).build());
+                if (Math.abs(deltaX) > MIN_DISTANCE) {
+                    // Left to Right swipe action
+                    if (x2 > x1) {
+                        startActivity(new Intent(this, ViewProfileActivity.class));
+                    }
 
-        if (!barcodeDetector.isOperational()) {
-            // Note: The first time that an app using the barcode or face API is installed on a
-            // device, GMS will download a native libraries to the device in order to do detection.
-            // Usually this completes before the app is run for the first time.  But if that
-            // download has not yet completed, then the above call will not detect any barcodes
-            // and/or faces.
-            //
-            // isOperational() can be used to check if the required native libraries are currently
-            // available.  The detectors will automatically become operational once the library
-            // downloads complete on device.
-            Log.w(TAG, "Detector dependencies are not yet available.");
-
-            // Check for low storage.  If there is low storage, the native library will not be
-            // downloaded, so detection will not become operational.
-            IntentFilter lowstorageFilter = new IntentFilter(Intent.ACTION_DEVICE_STORAGE_LOW);
-            boolean hasLowStorage = registerReceiver(null, lowstorageFilter) != null;
-
-            if (hasLowStorage) {
-                Toast.makeText(this, "Low Storage", Toast.LENGTH_LONG).show();
-            }
-        }
-
-        // Creates and starts the camera.  Note that this uses a higher resolution in comparison
-        // to other detection examples to enable the barcode detector to detect small barcodes
-        // at long distances.
-        CameraSource.Builder builder = new CameraSource.Builder(context, barcodeDetector)
-                .setFacing(CameraSource.CAMERA_FACING_BACK)
-                .setAutoFocusEnabled(autoFocus)
-                .setRequestedFps(requestedFps);
-
-        mCameraSource = builder
-                .build();
-    }
-
-    /**
-     * Start camera source
-     */
-    public void startCameraSource() throws SecurityException {
-        // check that the device has play services available.
-        int code = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(
-                getApplicationContext());
-        if (code != ConnectionResult.SUCCESS) {
-            Dialog dlg =
-                    GoogleApiAvailability.getInstance().getErrorDialog(this, code, RC_HANDLE_GMS);
-            dlg.show();
-        }
-
-        if (mCameraSource != null) {
-            try {
-                synchronized (mMutex) {
-                    mPreview.start(mCameraSource, mGraphicOverlay);
+                    // Right to left swipe action
+                    else {
+                        startActivity(new Intent(this, MapsActivity.class));
+                    }
+                    break;
                 }
-            } catch (IOException e) {
-                Log.e(TAG, "Unable to start camera source." + e);
-                mCameraSource.release();
-                mCameraSource = null;
-            }
         }
-    }
-
-    /**
-     * Request camera permission
-     */
-    private void requestCameraPermission() {
-        Log.w(TAG, "Camera permission is not granted. Requesting permission");
-
-        final String[] permissions = new String[]{Manifest.permission.CAMERA};
-
-        if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
-                Manifest.permission.CAMERA)) {
-            ActivityCompat.requestPermissions(this, permissions, RC_HANDLE_CAMERA_PERM);
-            return;
-        }
-
-        final Activity thisActivity = this;
-
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ActivityCompat.requestPermissions(thisActivity, permissions,
-                        RC_HANDLE_CAMERA_PERM);
-            }
-        };
-
-        topLayout.setOnClickListener(listener);
-        Snackbar.make(mGraphicOverlay, getString(R.string.qr_scan_request_camera_permission_message),
-                Snackbar.LENGTH_INDEFINITE)
-                .setAction(R.string.btn_OK, listener)
-                .show();
+        return super.onTouchEvent(event);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode != RC_HANDLE_CAMERA_PERM) {
-            Log.d(TAG, "Got unexpected permission result: " + requestCode);
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-            return;
-        }
-
-        if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            Log.d(TAG, "Camera permission granted - initialize the camera source");
-            // we have permission, so create the camerasource
-            createCameraSource();
-            startCameraSource();
-            return;
-        }
-
-        Log.d(TAG, "Permission not granted: results len = " + grantResults.length +
-                " Result code = " + (grantResults.length > 0 ? grantResults[0] : "(empty)"));
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.qr_scan_no_qr_detected)
-                .setMessage(R.string.qr_scan_request_permission_denied_message)
-                .setPositiveButton(android.R.string.ok, null)
-                .show();
+        qrScanPresenter.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     /**
@@ -240,8 +124,19 @@ public class QRScanActivity extends BaseActivity implements GraphicOverlay.OnSca
         }
     }
 
+
     @Override
     public void onNew(Barcode barcode) {
+        qrScanPresenter.readBarcode(barcode);
+    }
 
+    @Override
+    public void onScanSuccess() {
+        startActivity(new Intent(this, ViewProfileActivity.class));
+    }
+
+    @Override
+    public void onScanFail(String errorMessage) {
+        Toast.makeText(this, "Scan Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
     }
 }

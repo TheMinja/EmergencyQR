@@ -1,7 +1,12 @@
 package com.retro.emergencyqr.activities;
 
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -10,10 +15,14 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.retro.emergencyqr.R;
+import com.retro.emergencyqr.activities.qrReader.QRScanActivity;
+import com.retro.emergencyqr.framework.presenter.MapsPresenter;
+import com.retro.emergencyqr.framework.view.MapsView;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements MapsView, OnMapReadyCallback, View.OnClickListener {
 
     private GoogleMap mMap;
+    private MapsPresenter mapsPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +33,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
+
+//    @Override
+//    protected int getLayoutResourceId() {
+//        return R.layout.activity_maps;
+//    }
+//
+//    @Override
+//    protected void initEvent() {
+//
+//    }
+//
+//    @Override
+//    protected void initView() {
+//
+//    }
+//
+//    @Override
+//    protected void bindView() {
+//        mapsPresenter = new MapsPresenter(this);
+//        mapsPresenter.bindView(this);
+//    }
 
 
     /**
@@ -43,5 +73,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.mapsPhotoButton: {
+                startActivity(new Intent(this, QRScanActivity.class));
+            }
+            case R.id.mapsLocationButton: {
+
+            }
+        }
+    }
+
+    @Override
+    public void updateProgressDialog(boolean isShowProgressDialog) {
+
+    }
+
+    @Override
+    public void showErrorMessageDialog(String errorTitle, String errorMessage, Boolean isBackLogin) {
+
     }
 }

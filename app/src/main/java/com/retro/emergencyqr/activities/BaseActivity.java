@@ -41,9 +41,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             setContentView(getLayoutResourceId());
         }
         mNetworkConnectionReceiver = new NetworkConnectionReceiver();
+        bindView();
         initView();
         initEvent();
-        bindView();
     }
 
     @Override
