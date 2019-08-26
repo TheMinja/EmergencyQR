@@ -43,5 +43,6 @@ dependencies {
     implementation 'com.google.android.gms:play-services-vision:17.0.2'
     implementation 'com.facebook.android:facebook-login:5.1.1'
     implementation 'com.google.firebase:firebase-database:18.0.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
 }
 apply plugin: 'com.google.gms.google-services'

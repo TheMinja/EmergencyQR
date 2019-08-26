@@ -3,6 +3,12 @@ package com.retro.emergencyqr.framework.manager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+
+import com.google.gson.Gson;
+import com.retro.emergencyqr.R;
+
+import java.util.ArrayList;
 
 public class PrefsDataManager {
 
@@ -42,6 +48,17 @@ public class PrefsDataManager {
      */
     public Boolean commitToPreferences(){
         return editor.commit();
+    }
+
+    public void savePreferencesAsJson(ArrayList<String> keys){
+        Gson gson = new Gson();
+
+        ArrayList<String> values = new ArrayList<>();
+        for (String key: keys) {
+            values.add(readFromPreferences(key));
+        }
+
+        writeToPreferences(mActivity.getString(R.string.recordsJson), gson.toJson(values));
     }
 
 }

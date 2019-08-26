@@ -137,4 +137,5 @@
     <string name="recordsAllergiesKey">allergies</string>
     <string name="recordsMedicationKey">currentMedication</string>
     <string name="recordsHospitalKey">hospital</string>
+    <string name="recordsJson">json</string>
 </resources>
